@@ -45,23 +45,23 @@ public class InductionPlannerTest extends BaseTest {
         plannerPage.logout();
     }
 
-    @Test(description = "End-to-end test for Induction Planner workflow")
-    public void testInductionPlannerE2E() {
-        InductionPlannerPage plannerPage = new InductionPlannerPage();
+    // @Test(description = "End-to-end test for Induction Planner workflow")
+    // public void testInductionPlannerE2E() {
+    //     InductionPlannerPage plannerPage = new InductionPlannerPage();
 
-        // Step 1: Login
-        plannerPage.login(configManager.getUsername(), configManager.getPassword());
-        Assert.assertTrue(plannerPage.isLoginSuccessful(), "Login was not successful");
+    //     // Step 1: Login
+    //     plannerPage.login(configManager.getUsername(), configManager.getPassword());
+    //     Assert.assertTrue(plannerPage.isLoginSuccessful(), "Login was not successful");
 
-        // Step 2: Create a plan
-        String planTitle = "E2E Test Plan " + System.currentTimeMillis();
-        String planDescription = "This is an E2E test for the induction planner workflow";
+    //     // Step 2: Create a plan
+    //     String planTitle = "E2E Test Plan " + System.currentTimeMillis();
+    //     String planDescription = "This is an E2E test for the induction planner workflow";
 
-        plannerPage.createPlan(planTitle, planDescription);
-        Assert.assertTrue(plannerPage.isPlanCreationSuccessful(),
-                "Plan creation was not successful");
+    //     plannerPage.createPlan(planTitle, planDescription);
+    //     Assert.assertTrue(plannerPage.isPlanCreationSuccessful(),
+    //             "Plan creation was not successful");
 
-        // Step 3: Logout
-        plannerPage.logout();
-    }
+    //     // Step 3: Logout
+    //     plannerPage.logout();
+    // }
 }

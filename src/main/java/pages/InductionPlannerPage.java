@@ -1,5 +1,7 @@
 package pages;
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 import org.openqa.selenium.WebElement;
@@ -81,10 +83,15 @@ public class InductionPlannerPage extends BasePage {
         longWait.until(ExpectedConditions.elementToBeClickable(readBadgeAndSignOnButton));
         clickElement(readBadgeAndSignOnButton);
         
-        // Step 3: Click on OK button in the certificate dialog
+        // Step 3: Handle certificate dialog with Robot class to press Enter
         try {
-            longWait.until(ExpectedConditions.elementToBeClickable(okButton));
-            clickElement(okButton);
+            // Wait for the dialog to appear
+            Thread.sleep(3000); // Give time for dialog to appear
+            
+            // Use Robot to press Enter to click the OK button
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
             
             // Wait for authentication to complete and welcome message to appear
             longWait.until(ExpectedConditions.visibilityOf(welcomeMessage));
