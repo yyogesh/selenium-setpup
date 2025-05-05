@@ -1,7 +1,11 @@
 package pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Page object for the Induction Planner application
@@ -16,7 +20,16 @@ public class InductionPlannerPage extends BasePage {
 
     @FindBy(id = "loginButton")
     private WebElement loginButton;
-
+    
+    @FindBy(xpath = "//button[contains(text(), 'Boeing SSO (preferred)')]") 
+    private WebElement boeingSsoButton;
+    
+    @FindBy(xpath = "//button[text()='Read Badge and Sign On']")
+    private WebElement readBadgeAndSignOnButton;
+    
+    @FindBy(xpath = "//button[text()='OK']")
+    private WebElement okButton;
+    
     @FindBy(id = "welcomeMessage")
     private WebElement welcomeMessage;
 
@@ -50,6 +63,35 @@ public class InductionPlannerPage extends BasePage {
         sendKeys(passwordField, password);
         clickElement(loginButton);
         waitForPageLoad();
+        return this;
+    }
+    
+    /**
+     * Login using Boeing SSO authentication
+     * 
+     * @return InductionPlannerPage instance for method chaining
+     */
+    public InductionPlannerPage loginWithBoeingSso() {
+        // Step 1: Click on Boeing SSO button
+        clickElement(boeingSsoButton);
+        waitForPageLoad();
+        
+        // Step 2: Click on Read Badge and Sign On button
+        WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        longWait.until(ExpectedConditions.elementToBeClickable(readBadgeAndSignOnButton));
+        clickElement(readBadgeAndSignOnButton);
+        
+        // Step 3: Click on OK button in the certificate dialog
+        try {
+            longWait.until(ExpectedConditions.elementToBeClickable(okButton));
+            clickElement(okButton);
+            
+            // Wait for authentication to complete and welcome message to appear
+            longWait.until(ExpectedConditions.visibilityOf(welcomeMessage));
+        } catch (Exception e) {
+            System.err.println("SSO authentication may not have completed: " + e.getMessage());
+        }
+        
         return this;
     }
 

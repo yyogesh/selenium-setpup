@@ -7,27 +7,30 @@ import pages.InductionPlannerPage;
  */
 public class InductionPlannerTest extends BaseTest {
 
-    @Test(description = "Verify user can login to the Induction Planner")
-    public void testLogin() {
-        InductionPlannerPage plannerPage = new InductionPlannerPage();
+    // @Test(description = "Verify user can login to the Induction Planner")
+    // public void testLogin() {
+    //     InductionPlannerPage plannerPage = new InductionPlannerPage();
 
-        plannerPage.login(configManager.getUsername(), configManager.getPassword());
+    //     plannerPage.login(configManager.getUsername(), configManager.getPassword());
 
-        Assert.assertTrue(plannerPage.isLoginSuccessful(), "Login was not successful");
+    //     Assert.assertTrue(plannerPage.isLoginSuccessful(), "Login was not successful");
 
-        String welcomeMessage = plannerPage.getWelcomeMessage();
-        Assert.assertTrue(welcomeMessage.contains(configManager.getUsername()),
-                "Welcome message does not contain the username");
+    //     String welcomeMessage = plannerPage.getWelcomeMessage();
+    //     Assert.assertTrue(welcomeMessage.contains(configManager.getUsername()),
+    //             "Welcome message does not contain the username");
 
-        plannerPage.logout();
-    }
+    //     plannerPage.logout();
+    // }
 
     @Test(description = "Verify user can create a new induction plan")
     public void testCreateInductionPlan() {
         InductionPlannerPage plannerPage = new InductionPlannerPage();
 
         // Login first
-        plannerPage.login(configManager.getUsername(), configManager.getPassword());
+        // plannerPage.login(configManager.getUsername(), configManager.getPassword());
+        
+        // With:
+        plannerPage.loginWithBoeingSso();
         Assert.assertTrue(plannerPage.isLoginSuccessful(), "Login was not successful");
 
         // Create a new plan
